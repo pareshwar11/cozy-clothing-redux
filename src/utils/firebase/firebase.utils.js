@@ -36,9 +36,6 @@ export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 
 export const db = getFirestore();
 
-
-
-
 // start collection for fireStore DB
 
 export const addCollectionAndDocuments = async (
@@ -65,13 +62,7 @@ export const addCollectionAndDocuments = async (
   const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    const { title, items } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-
-  return categoryMap;
+  return querySnapshot.docs.map((doc) => doc.data());
 };
 
  // End of Get categories from FireStore
